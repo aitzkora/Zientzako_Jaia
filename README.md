@@ -1,4 +1,5 @@
 Zientzako_Jaia
 ==============
 
-Zientzako Jaiagatik lanak
+source latex et pour l'initiation a Python dans le cadre de
+la fete de la science
