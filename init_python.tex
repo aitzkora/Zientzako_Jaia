@@ -24,23 +24,14 @@
 
 % !! pour le francais
 \usepackage[latin1]{inputenc}
+\usepackage{listings}
 %\usepackage[ec]{aeguill}
 % ou mieux \usepackage[cyr]{aeguill} si disponible
 % aeguill charge ae automatiquement
 % et ae charge [T1]{fontenc} automatiquement
 \usepackage[french]{babel}
-\usepackage{algorithmicx}
 \usepackage{algpseudocode}
-\usepackage{fancyvrb}
 \usepackage{relsize}
-\usepackage{color}
-
-
-
-%\usepackage[T1]{fontenc}
-
-%% ====== more def ==
-
 \newcommand{\fleche}{\alert{$\pmb{\longrightarrow}$}~~}
 \newcommand{\calM}{{\mathcal{M}}}
 \newcommand{\calU}{{\mathcal{U}}}
@@ -65,23 +56,7 @@
 \newcommand{\prods}[2]{\langle #1,#2 \rangle}
 \newcommand{\Aa}{\mathcal{A}}
 \newcommand{\norm}[1]{\|#1\|}
-%\DeclareMathOperator{\vect}{vect}
-%\newcommand{\rint}{\textrm{ri}\,}
-\newcommand{\vect}{\mathrm{vect}}
-\newenvironment{disarray}%
- {\everymath{\displaystyle\everymath{}}\array}%
- {\endarray}
-
-\catcode`\«=\active
-\catcode`\»=\active
-\def«{\og\ignorespaces}
-\def»{{\fg}}
-
-% et la commande Pour les guillemets
-\newcommand{\guill}[1]{«#1»} % attention deja dans mycv
-
-\renewcommand{\succeq}{\succcurlyeq}
-\renewcommand{\preceq}{\preccurlyeq}
+\newcommand{\python}{\textcolor{dkgreen}{\bf Python}{} }
 
 %% ====== my bearmer ==
 \mode<presentation> {
@@ -92,10 +67,38 @@
 % options
 \useinnertheme[shadow]{rounded}  % les numeros
 }
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
 
 
 \usefonttheme{structurebold}
 
+\lstset{ %
+  language=python,                % the language of the code
+  framerule=0pt,
+  basicstyle=\relsize{-2}\ttfamily,  % the size of the fonts that are used for the code
+  %backgroundcolor=\color{black!10},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  %frame=single,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  keywordstyle=\color{blue},      % keyword style
+  commentstyle=\color{dkgreen},   % comment style
+  stringstyle=\color{mauve}  
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Francisation du pseudo code
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\algrenewcommand\algorithmicif{\textbf{si}}
+\algrenewcommand\algorithmicend{\textbf{fin}}
+\algrenewcommand\algorithmicelse{\textbf{sinon}}
+\algrenewcommand\algorithmicwhile{\textbf{tant que}}
+\algrenewcommand\algorithmicthen{\textbf{alors}}
+\algrenewcommand\algorithmicfor{\textbf{Pour}}
 
 
 \begin{document}
@@ -142,7 +145,7 @@
 %  example 1
 %****************************************************************
 \begin{frame}
-\frametitle{Exemple 1 : somme des $n$ premier entiers}
+\frametitle{Exemple : somme des $n$ premiers entiers}
 \begin{itemize}[<+->]
   \item l'algorithme peut ressembler a ca : 
    \begin{description}
@@ -159,18 +162,58 @@
 %****************************************************************
 %  example 1
 %****************************************************************
-\begin{frame}
-\frametitle{Exemple 1 : somme des $n$ premier entiers}
+\begin{frame}[fragile]
+\frametitle{Exemple : somme des $n$ premier entiers}
 \begin{itemize}[<+->]
   \item On peut formaliser {\bf l'algorithme} avec du {\em pseudo-code}
    \begin{algorithmic}[H]
-     \State{$s \gets 1$}
-     \For{$i = 2,..,n$} 
-          \State{ $s \gets s + i$}
-     \EndFor
-     \Return{s}
+   \State{$s \gets 1$}
+   \For{$i\gets 2,n$} 
+   \State{$s \gets s + i$}
+   \EndFor
+   \Return{s}
    \end{algorithmic}
+\item Ce qui donne en python
+\begin{lstlisting} 
+def calcul_somme(n):
+    s = 0
+    for i in range(n):
+        s = s + i
+    return s 
+print '1+..+ 100 = ', calcul_somme(100)   
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Structure de contrôle : branchement}
+\begin{itemize}
+ \item On peut avoir besoin dans un programme, selon un résultat
+d'opter entre 2 ou plusieurs choix. 
+\begin{algorithmic}
+\If{ condition 1 } 
+    \State{ action 1} 
+\Else{ Condition 2 }    
+    \State{ action 2}
+\EndIf
+\end{algorithmic}
+\item en \python on fait comme cela
+\begin{lstlisting}
+if x < 1.50 :
+   print('je suis petit')
+elif  x < 1.80 :
+   print('je suis moyen')
+else:
+   print('je suis grand')
+\end{lstlisting}
 \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Structure de contrôle : boucle tant que }
+\begin{itemize}
+ \item Les programmes informatiques permettent facilement de repeter une tâche : on appelle cela une \textcolor{blue}{itération}.
+
+\item en \python on fait comme cela
+\end{itemize}
+\end{frame}
 \end{document}
