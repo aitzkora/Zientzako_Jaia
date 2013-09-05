@@ -98,7 +98,9 @@
 \algrenewcommand\algorithmicelse{\textbf{sinon}}
 \algrenewcommand\algorithmicwhile{\textbf{tant que}}
 \algrenewcommand\algorithmicthen{\textbf{alors}}
-\algrenewcommand\algorithmicfor{\textbf{Pour}}
+\algrenewcommand\algorithmicfor{\textbf{pour}}
+\algrenewcommand\algorithmicfor{\textbf{retouner}}
+\algrenewcommand\algorithmicdo{\textbf{faire}}
 
 
 \begin{document}
@@ -164,23 +166,21 @@
 %****************************************************************
 \begin{frame}[fragile]
 \frametitle{Exemple : somme des $n$ premier entiers}
-\begin{itemize}[<+->]
-  \item On peut formaliser {\bf l'algorithme} avec du {\em pseudo-code}
-   \begin{algorithmic}[H]
+\begin{itemize}
+  \item On peut formaliser l'{\bf algorithme} avec du {\em pseudo-code}
+   \begin{algorithmic}
    \State{$s \gets 1$}
    \For{$i\gets 2,n$} 
-   \State{$s \gets s + i$}
+     \State{$s \gets s + i$}
    \EndFor
-   \Return{s}
+   \State{afficher $s$}
    \end{algorithmic}
-\item Ce qui donne en python
+\item Ce qui donne en \python
 \begin{lstlisting} 
-def calcul_somme(n):
-    s = 0
+    s = 1  
     for i in range(n):
         s = s + i
-    return s 
-print '1+..+ 100 = ', calcul_somme(100)   
+    print s
 \end{lstlisting}
 \end{itemize}
 \end{frame}
@@ -209,11 +209,40 @@ else:
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Structure de contrôle : boucle tant que }
+\frametitle{Structure de contrôle : itération}
 \begin{itemize}
- \item Les programmes informatiques permettent facilement de repeter une tâche : on appelle cela une \textcolor{blue}{itération}.
+ \item But : répeter des tâches sembabes
+\item boucle {\bf tant que } : on boucle tant qu'une condition est vraie  
+\begin{columns}
+\column{0.4\linewidth}
+\begin{algorithmic}
+\State{$i \gets 1$} 
+\While{ $i < 10$} 
+    \State{ $i \gets 2 \times i$ } 
+\EndWhile
+\end{algorithmic}
+\column{0.4\linewidth}
+\begin{lstlisting}
+i = 1  
+while i < 10 : 
+    i = i * 2
+\end{lstlisting}
+\end{columns}
+\item boucle énumerative : on parcours un ensemble de valeurs 
+\begin{columns}
+\column{0.5\linewidth}
+\begin{algorithmic}
+\For{$i = 1, \cdots, 10 $} 
+    \State{Afficher $i$}
+\EndFor
+\end{algorithmic}
+\column{0.5\linewidth}
+\begin{lstlisting}
+for i in range(1,11): 
+    print(i)  
+\end{lstlisting}
+\end{columns}
 
-\item en \python on fait comme cela
 \end{itemize}
 \end{frame}
 \end{document}
