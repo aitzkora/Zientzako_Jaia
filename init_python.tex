@@ -184,6 +184,52 @@
 \end{lstlisting}
 \end{itemize}
 \end{frame}
+%****************************************************************
+% Remarques générales sur Python 
+%****************************************************************
+\begin{frame}[fragile]
+\frametitle{Caractèristiques du langage \python}
+\begin{itemize}
+  \item \python est un langage interprété : on peut modifier
+  dynamiquement (à la volée) le code du programme.
+  \item la structure du programme se gère grâce à des indentations : attention à aligner
+  les blocs avec le même nombre d'espace
+\begin{columns}
+\column{0.4\linewidth}
+{\bf Correct} 
+\begin{lstlisting}
+i = 1  
+while i < 10 : 
+    i = i * 2
+    j = i - 2
+\end{lstlisting}
+\column{0.4\linewidth}
+{\bf pas bien }
+\begin{lstlisting}
+  i = 1  
+while i < 10 : 
+    i = i * 2
+  j = i - 2
+\end{lstlisting}
+\end{columns}
+\end{itemize}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Le premier programme}
+\begin{itemize}
+ \item Quand on commence a apprendre un langage informatique, la ``tradition'' veut que le premier
+ programme qu'on écrit soit un programme affichant ``bonjour, monde''\footnote{Hello, World dans la langue de Shakespeare}
+\item dans la console de {\bf spyder}, on ecrira
+\begin{lstlisting}
+print "bonjour, Monde"
+\end{lstlisting}
+\item ca doit ressembler à quelque chose comme
+\begin{center}
+\includegraphics[width=0.7\linewidth]{capture_hello.png}
+\end{center}
+\end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : branchement}
 \begin{itemize}
