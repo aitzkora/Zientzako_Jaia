@@ -99,7 +99,7 @@
 \algrenewcommand\algorithmicwhile{\textbf{tant que}}
 \algrenewcommand\algorithmicthen{\textbf{alors}}
 \algrenewcommand\algorithmicfor{\textbf{pour}}
-\algrenewcommand\algorithmicfor{\textbf{retouner}}
+\algrenewcommand\algorithmicreturn{\textbf{retourner}}
 \algrenewcommand\algorithmicdo{\textbf{faire}}
 
 
@@ -110,7 +110,7 @@
 %**************************************************************
 \begin{frame}
 \begin{center}
-{\Large Initiation a la Programmation avec Python } 
+{\Large Initiation à la Programmation avec Python } 
 \end{center}
 %\begin{center}
 %\includegraphics[width=0.3\linewidth]{Fig/gdb}
@@ -129,48 +129,38 @@
 
 \begin{enumerate}
 \item Qu'est ce que la programmation 
-\item Exemples 
-\item Python
-   \begin{itemize}
-    \item données python
-    \item structures de contrôle. 
-   \end{itemize}
+\item Python 
+\item Exemples
 \end{enumerate}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+% Exemple de la somme des n premiers entiers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%****************************************************************
-%  example 1
-%****************************************************************
 \begin{frame}
 \frametitle{Exemple : somme des $n$ premiers entiers}
 \begin{itemize}[<+->]
   \item l'algorithme peut ressembler a ca : 
    \begin{description}
       \item[1.] dans une case mémoire (variable) je mets 1
-      \item[2.] au contenu de la case mémoire j'atoute 2
-      \item[2.] au contenu de la case j'atoute 3 
+      \item[2.] au contenu de la case mémoire, j'ajoute 2
+      \item[2.] au contenu de la case, j'ajoute 3 
       \item[...] .....
-      \item[n.] au contenu de la case mémoire j'atoute $n$ 
+      \item[n.] au contenu de la case mémoire, j'ajoute $n$ 
       \item[n+1.] je retourne le contenu de la case mémoire
    \end{description}
 \end{itemize}
 \end{frame}
 
-%****************************************************************
-%  example 1
-%****************************************************************
 \begin{frame}[fragile]
-\frametitle{Exemple : somme des $n$ premier entiers}
+\frametitle{Exemple : somme des $n$ premiers entiers}
 \begin{itemize}
   \item On peut formaliser l'{\bf algorithme} avec du {\em pseudo-code}
    \begin{algorithmic}
    \State{$s \gets 1$}
-   \For{$i\gets 2,n$} 
+   \For{$i= 2,\cdots,n$} 
      \State{$s \gets s + i$}
    \EndFor
    \State{afficher $s$}
@@ -188,15 +178,16 @@
 % Remarques générales sur Python 
 %****************************************************************
 \begin{frame}[fragile]
-\frametitle{Caractèristiques du langage \python}
+\frametitle{Caracteristiques du langage \python}
 \begin{itemize}
   \item \python est un langage interprété : on peut modifier
   dynamiquement (à la volée) le code du programme.
   \item la structure du programme se gère grâce à des indentations : attention à aligner
   les blocs avec le même nombre d'espace
+\vspace{1cm}
 \begin{columns}
 \column{0.4\linewidth}
-{\bf Correct} 
+{\bf \textcolor{blue}{Bien}} 
 \begin{lstlisting}
 i = 1  
 while i < 10 : 
@@ -204,7 +195,7 @@ while i < 10 :
     j = i - 2
 \end{lstlisting}
 \column{0.4\linewidth}
-{\bf pas bien }
+{\bf \textcolor{red}{Pas bien}}
 \begin{lstlisting}
   i = 1  
 while i < 10 : 
@@ -221,7 +212,7 @@ while i < 10 :
  programme qu'on écrit soit un programme affichant ``bonjour, monde''\footnote{Hello, World dans la langue de Shakespeare}
 \item dans la console de {\bf spyder}, on ecrira
 \begin{lstlisting}
-print "bonjour, Monde"
+print 'bonjour, Monde'
 \end{lstlisting}
 \item ca doit ressembler à quelque chose comme
 \begin{center}
@@ -233,16 +224,20 @@ print "bonjour, Monde"
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : branchement}
 \begin{itemize}
- \item On peut avoir besoin dans un programme, selon un résultat
+\item On peut avoir besoin dans un programme, selon un résultat
 d'opter entre 2 ou plusieurs choix. 
+\begin{columns}
+\column{0.5\linewidth}
 \begin{algorithmic}
-\If{ condition 1 } 
-    \State{ action 1} 
-\Else{ Condition 2 }    
-    \State{ action 2}
+\If{ $x < 1.5$} 
+    \State{afficher 'je suis petit'} 
+\ElsIf{$ x < 1.8$}
+    \State{afficher 'je suis moyen'} 
+\Else
+    \State{afficher 'je suis grand'} 
 \EndIf
 \end{algorithmic}
-\item en \python on fait comme cela
+\column{0.5\linewidth}
 \begin{lstlisting}
 if x < 1.50 :
    print('je suis petit')
@@ -251,14 +246,12 @@ elif  x < 1.80 :
 else:
    print('je suis grand')
 \end{lstlisting}
+\end{columns}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Structure de contrôle : itération}
-\begin{itemize}
- \item But : répeter des tâches sembabes
-\item boucle {\bf tant que } : on boucle tant qu'une condition est vraie  
+\frametitle{Structure de contrôle : boucle \textbf{tant que}}
 \begin{columns}
 \column{0.4\linewidth}
 \begin{algorithmic}
@@ -274,7 +267,12 @@ while i < 10 :
     i = i * 2
 \end{lstlisting}
 \end{columns}
-\item boucle énumerative : on parcours un ensemble de valeurs 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Structure de contrôle : boucle enumérative}
+\begin{itemize}
+\item
 \begin{columns}
 \column{0.5\linewidth}
 \begin{algorithmic}
@@ -288,7 +286,40 @@ for i in range(1,11):
     print(i)  
 \end{lstlisting}
 \end{columns}
+\item
+\begin{columns}
+\column{0.5\linewidth}
+\begin{algorithmic}
+\State{$l \gets ('Mont','au','ban')$}
+\State{$colle \gets ''$}
+\For{$m \in l$} 
+    \State{$colle \gets colle + m$}
+\EndFor
+\end{algorithmic}
+\column{0.5\linewidth}
+\begin{lstlisting}
+l = ['Mont','au','ban']
+colle = ''
+for m in l:
+    colle = colle + m
+\end{lstlisting}
+\end{columns}
+\end{itemize}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Structure de contrôle : les fonctions}
+\begin{itemize}
+\item Permet de découper un programme en sous tâches. 
+\item prend des arguments (liste d'arguments en parenthèses)
+\item renvoie un résultat (mot-clef return)
+\begin{lstlisting} 
+def est_un_carre(x):
+       if sqrt(x)*sqrt(x) == x : 
+           return True
+       else :
+           return False
+\end{lstlisting} 
 \end{itemize}
 \end{frame}
 \end{document}
