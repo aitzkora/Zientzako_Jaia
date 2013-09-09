@@ -101,6 +101,7 @@
 \algrenewcommand\algorithmicfor{\textbf{pour}}
 \algrenewcommand\algorithmicreturn{\textbf{retourner}}
 \algrenewcommand\algorithmicdo{\textbf{faire}}
+\algrenewcommand\algorithmicfunction{\textbf{fonction}}
 
 
 \begin{document}
@@ -313,13 +314,27 @@ for m in l:
 \item Permet de découper un programme en sous tâches. 
 \item prend des arguments (liste d'arguments en parenthèses)
 \item renvoie un résultat (mot-clef return)
+\begin{columns}
+\column{0.5\linewidth}
+\begin{algorithmic}
+\Function{est\_un\_carre}{$x$}
+   %\If {$\sqrt{x} \dot \sqrt{x} = x$}
+   \If { $x = x$}
+       \State{\textbf{retourner} vrai}
+    \Else 
+       \State{\textbf{retourner} faux}
+   \EndIf
+\EndFunction
+\end{algorithmic}
+\column{0.5\linewidth}
 \begin{lstlisting} 
 def est_un_carre(x):
-       if sqrt(x)*sqrt(x) == x : 
-           return True
-       else :
-           return False
+    if sqrt(x)*sqrt(x) == x : 
+        return True
+    else :
+        return False
 \end{lstlisting} 
+\end{columns}
 \end{itemize}
 \end{frame}
 \end{document}
