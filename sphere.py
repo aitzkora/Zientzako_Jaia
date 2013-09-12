@@ -16,8 +16,8 @@ import time
 import sys
 # Description de la scene
 L = 10.
-P = 1.
-H = 4
+P = 5.
+H = 4.
 
 # Next we create an instance of vtkConeSource and set some of its
 # properties. The instance of vtkConeSource "sphere" is part of a visualization
@@ -27,6 +27,16 @@ H = 4
 sphere = vtk.vtkSphereSource()
 sphere.SetPhiResolution( 20 )
 sphere.SetThetaResolution( 20 )
+
+
+#Cube pour le pourtour
+cube = vtk.vtkCubeSource()
+cube.SetXLength(L)
+cube.SetYLength(H)
+cube.SetZLength(P)
+
+
+
 
 
 #Filtre de coloration
@@ -62,6 +72,18 @@ sphereMapper.SetInputConnection( color_filter.GetOutputPort() )
 sphereActor = vtk.vtkActor()
 sphereActor.SetMapper( sphereMapper )
 sphereActor.SetPosition(0., H, 0.)
+
+
+cubeMapper = vtk.vtkPolyDataMapper()
+cubeMapper.SetInputConnection(cube.GetOutputPort())
+
+
+cubeActor = vtk.vtkActor()
+cubeActor.SetMapper(cubeMapper)
+cubeActor.GetProperty().SetRepresentationToWireframe()
+cubeActor.SetPosition(L/2.,H/2.,P/2)
+
+
 #
 # Create the Renderer and assign actors to it. A renderer is like a
 # viewport. It is part or all of a window on the screen and it is
@@ -70,6 +92,7 @@ sphereActor.SetPosition(0., H, 0.)
 #
 ren1= vtk.vtkRenderer()
 ren1.AddActor( sphereActor )
+ren1.AddActor( cubeActor )
 ren1.SetBackground( 0.1, 0.2, 0.8 )
 ren1.SetViewport(-L/2,-H/2,1.5*L,1.5*H)
 #ren1.GetActiveCamera().SetPosition(0,0,1)
@@ -206,35 +229,40 @@ iren.Initialize()
 renWin.Render()
 iren.Start()
 
-#
-# now we loop over 360 degreeees and render the sphere each time
-#
-#for i in range(max_it):
-import numpy as np
 N=100
-dx = L*1./N
+dx = L*1./(3.*N)
 dy = -H*1./N
+dz = -1./N
 y = H
 x = 0.
+z = 0.
 t = 0
 dt = 1/100.
+frein = 0.8
 while True:
     time.sleep(0.01)
     t += dt
-    x += t*dx
-    y += t*dy
+    x += t * dx
+    y += t * dy
+    z += t * dz
     if y < 0: 
-        dy = -dy
+        dy *= -frein 
         y = 0
     if y > H:
-        dy = -dy
+        dy *= -frein
         y = H
     if x < 0:
-        dx = -dx
+        dx *= -frein
         x = 0
     if x > L: 
-        dx = -dx
+        dx *= -frein
         x = L
-    sphereActor.SetPosition(x,y,0.)
+    if z < 0:
+        dz *= -frein
+        z = 0
+    if z > P: 
+        dz *= -frein
+        z = P
+    sphereActor.SetPosition(x,y,z)
     renWin.Render()
-    #ren1.GetActiveCamera().Azimuth( 1 )
+    ren1.GetActiveCamera().Azimuth( 0.2 )
