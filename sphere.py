@@ -141,7 +141,7 @@ def Keypress(obj, event):
     if key == "e":
         obj.InvokeEvent("DeleteAllObjects")
         sys.exit()
-    if key == "d":
+    elif key == "d":
           iren.GetRenderWindow().Finalize()
     elif key == "w":
         Wireframe()
@@ -210,9 +210,31 @@ iren.Start()
 # now we loop over 360 degreeees and render the sphere each time
 #
 #for i in range(max_it):
-for i in range(1000):
+import numpy as np
+N=100
+dx = L*1./N
+dy = -H*1./N
+y = H
+x = 0.
+t = 0
+dt = 1/100.
+while True:
     time.sleep(0.01)
-    x,y = f_pos(i)
+    t += dt
+    x += t*dx
+    y += t*dy
+    if y < 0: 
+        dy = -dy
+        y = 0
+    if y > H:
+        dy = -dy
+        y = H
+    if x < 0:
+        dx = -dx
+        x = 0
+    if x > L: 
+        dx = -dx
+        x = L
     sphereActor.SetPosition(x,y,0.)
     renWin.Render()
-    ren1.GetActiveCamera().Azimuth( 1 )
+    #ren1.GetActiveCamera().Azimuth( 1 )
