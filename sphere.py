@@ -13,19 +13,35 @@ import numpy as np
 #
 import vtk
 import time
+import sys
+# Description de la scene
+L = 10.
+P = 1.
+H = 4
 
-#
 # Next we create an instance of vtkConeSource and set some of its
 # properties. The instance of vtkConeSource "sphere" is part of a visualization
 # pipeline (it is a source process object); it produces data (output type is
 # vtkPolyData) which other filters may process.
 #
 sphere = vtk.vtkSphereSource()
-sphere.SetRadius( 1. )
-sphere.SetPhiResolution( 30 )
-sphere.SetThetaResolution( 30 )
+sphere.SetPhiResolution( 20 )
+sphere.SetThetaResolution( 20 )
 
-#
+
+#Filtre de coloration
+color_filter = vtk.vtkElevationFilter();
+color_filter.SetInputConnection(sphere.GetOutputPort())
+color_filter.SetLowPoint(0,0,-0.5);
+color_filter.SetHighPoint(0,0,0.5);
+
+# table de valeurs 
+tv = vtk.vtkLookupTable()
+tv.SetHueRange(0.667,0.)
+tv.SetSaturationRange(1,1)
+tv.SetValueRange(1,1)
+
+
 # In this example we terminate the pipeline with a mapper process object.
 # (Intermediate filters such as vtkShrinkPolyData could be inserted in
 # between the source and the mapper.)  We create an instance of
@@ -33,12 +49,9 @@ sphere.SetThetaResolution( 30 )
 # connect the output of the sphere souece to the input of this mapper.
 #
 sphereMapper = vtk.vtkPolyDataMapper()
-sphereMapper.SetInputConnection( sphere.GetOutputPort() )
+sphereMapper.SetLookupTable(tv)
+sphereMapper.SetInputConnection( color_filter.GetOutputPort() )
 
-# Description de la scene
-L = 10.
-P = 1.
-H = 4
 
 #
 # Create an actor to represent the sphere. The actor orchestrates rendering of
@@ -59,7 +72,8 @@ ren1= vtk.vtkRenderer()
 ren1.AddActor( sphereActor )
 ren1.SetBackground( 0.1, 0.2, 0.8 )
 ren1.SetViewport(-L/2,-H/2,1.5*L,1.5*H)
-ren1.GetActiveCamera().SetPosition(0,0,1)
+#ren1.GetActiveCamera().SetPosition(0,0,1)
+#ren1.GetActiveCamera().Dolly(1.)
 #
 # Finally we create the render window which will show up on the screen
 # We put our renderer into the render window using AddRenderer. We also
@@ -72,18 +86,133 @@ renWin.SetSize( 1000, 800 )
 max_it = 100
 
 
-def f_pos(i):
-    x = float(i)/max_it * L
-    y = H - float(i)/max_it * H/2 
-    return x,y
+# Define custom interaction.
+# Add the observers to watch for particular events. These invoke
+# Python functions.
+Rotating = 0
+Panning = 0
+Zooming = 0
 
+iren = vtk.vtkRenderWindowInteractor()
+iren.SetInteractorStyle(None)
+iren.SetRenderWindow(renWin)
+
+# Handle the mouse button events.
+def ButtonEvent(obj, event):
+    global Rotating, Panning, Zooming
+    if event == "LeftButtonPressEvent":
+        Rotating = 1
+    elif event == "LeftButtonReleaseEvent":
+        Rotating = 0
+    elif event == "RightButtonPressEvent":
+        Zooming = 1
+    elif event == "RightButtonReleaseEvent":
+        Zooming = 0
+
+# General high-level logic
+def MouseMove(obj, event):
+    global Rotating, Panning, Zooming
+    global iren, renWin, ren
+    lastXYpos = iren.GetLastEventPosition()
+    lastX = lastXYpos[0]
+    lastY = lastXYpos[1]
+
+    xypos = iren.GetEventPosition()
+    x = xypos[0]
+    y = xypos[1]
+
+    center = renWin.GetSize()
+    centerX = center[0]/2.0
+    centerY = center[1]/2.0
+
+    if Rotating:
+        Rotate(ren1, ren1.GetActiveCamera(), x, y, lastX, lastY,
+               centerX, centerY)
+    elif Panning:
+        Pan(ren1, ren1.GetActiveCamera(), x, y, lastX, lastY, centerX,
+            centerY)
+    elif Zooming:
+        Dolly(ren1, ren1.GetActiveCamera(), x, y, lastX, lastY,
+              centerX, centerY)
+  
+
+def Keypress(obj, event):
+    key = obj.GetKeySym()
+    if key == "e":
+        obj.InvokeEvent("DeleteAllObjects")
+        sys.exit()
+    if key == "d":
+          iren.GetRenderWindow().Finalize()
+    elif key == "w":
+        Wireframe()
+    elif key =="s":
+        Surface() 
+ 
+
+# Routines that translate the events into camera motions.
+
+# This one is associated with the left mouse button. It translates x
+# and y relative motions into camera azimuth and elevation commands.
+def Rotate(renderer, camera, x, y, lastX, lastY, centerX, centerY):    
+    camera.Azimuth(1)
+    camera.Elevation(lastY-y)
+    camera.OrthogonalizeViewUp()
+    renWin.Render()
+
+
+# Dolly converts y-motion into a camera dolly commands.
+def Dolly(renderer, camera, x, y, lastX, lastY, centerX, centerY):
+    dollyFactor = pow(1.02,(0.5*(y-lastY)))
+    if camera.GetParallelProjection():
+        parallelScale = camera.GetParallelScale()*dollyFactor
+        camera.SetParallelScale(parallelScale)
+    else:
+        camera.Dolly(dollyFactor)
+        renderer.ResetCameraClippingRange()
+
+    renWin.Render() 
+
+# Wireframe sets the representation of all actors to wireframe.
+def Wireframe():
+    actors = ren1.GetActors()
+    actors.InitTraversal()
+    actor = actors.GetNextItem()
+    while actor:
+        actor.GetProperty().SetRepresentationToWireframe()
+        actor = actors.GetNextItem()
+
+    renWin.Render() 
+
+# Surface sets the representation of all actors to surface.
+def Surface():
+    actors = ren1.GetActors()
+    actors.InitTraversal()
+    actor = actors.GetNextItem()
+    while actor:
+        actor.GetProperty().SetRepresentationToSurface()
+        actor = actors.GetNextItem()
+    renWin.Render()
+
+
+ren1.AddObserver("LeftButtonPressEvent", ButtonEvent)
+iren.AddObserver("LeftButtonReleaseEvent", ButtonEvent)
+iren.AddObserver("RightButtonPressEvent", ButtonEvent)
+iren.AddObserver("RightButtonReleaseEvent", ButtonEvent)
+iren.AddObserver("MouseMoveEvent", MouseMove)
+iren.AddObserver("KeyPressEvent", Keypress)
+
+
+iren.Initialize()
+renWin.Render()
+iren.Start()
 
 #
 # now we loop over 360 degreeees and render the sphere each time
 #
-for i in range(max_it):
+#for i in range(max_it):
+for i in range(1000):
     time.sleep(0.01)
     x,y = f_pos(i)
     sphereActor.SetPosition(x,y,0.)
     renWin.Render()
-    #ren1.GetActiveCamera().Azimuth( 1 )
+    ren1.GetActiveCamera().Azimuth( 1 )
