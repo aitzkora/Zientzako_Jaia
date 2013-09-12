@@ -59,7 +59,7 @@ ren1= vtk.vtkRenderer()
 ren1.AddActor( sphereActor )
 ren1.SetBackground( 0.1, 0.2, 0.8 )
 ren1.SetViewport(-L/2,-H/2,1.5*L,1.5*H)
-ren1.GetActiveCamera().SetPosition(0,0,)
+ren1.GetActiveCamera().SetPosition(0,0,1)
 #
 # Finally we create the render window which will show up on the screen
 # We put our renderer into the render window using AddRenderer. We also
