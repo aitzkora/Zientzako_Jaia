@@ -18,7 +18,6 @@ import sys
 L = 10.
 P = 5.
 H = 4.
-
 # Next we create an instance of vtkConeSource and set some of its
 # properties. The instance of vtkConeSource "sphere" is part of a visualization
 # pipeline (it is a source process object); it produces data (output type is
@@ -67,7 +66,7 @@ sphereMapper.SetInputConnection( color_filter.GetOutputPort() )
 #
 sphereActor = vtk.vtkActor()
 sphereActor.SetMapper( sphereMapper )
-sphereActor.SetPosition(0., H, 0.)
+sphereActor.SetPosition(0., H, P/2)
 
 
 cubeMapper = vtk.vtkPolyDataMapper()
@@ -115,7 +114,7 @@ dy = -H*1./N
 dz = -1./N
 y = H
 x = 0.
-z = 0.
+z = P/2. 
 t = 0
 dt = 1/100.
 frein = 0.8

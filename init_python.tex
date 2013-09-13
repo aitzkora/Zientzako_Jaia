@@ -127,20 +127,35 @@
 
 \begin{frame}
 \frametitle{Plan}
-
 \begin{enumerate}
 \item Qu'est ce que la programmation 
-\item Python 
-\item Exercices
+\item Présentation de Python 
+\item Exemples 
 \end{enumerate}
-
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Exemple de la somme des n premiers entiers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}
+\begin{frame}[fragile]
+\frametitle{Définition de la Programmation}
+\begin{itemize}
+  \item En partant d'un \textbf{algorithme} qui réalise une tâche donnée, on écrit un logiciel ou un programme à l'aide d' un langage
+  informatique, qui lorsque qu'on l'execute sur un ordinater va effectivement réaliser cette tâche.
+  \item le programme prend souvent des données en entrée, réalise un traitement dessus, et fournit des données en sortie. C'est la
+  valeur ajouté d'un programme
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.3\linewidth]{dik2.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exemple de la somme des n premiers entiers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
 \frametitle{Exemple : somme des $n$ premiers entiers}
 \begin{itemize}[<+->]
   \item l'algorithme peut ressembler a ca : 
@@ -148,7 +163,7 @@
       \item[1.] dans une case mémoire (variable) je mets 1
       \item[2.] au contenu de la case mémoire, j'ajoute 2
       \item[3.] au contenu de la case, j'ajoute 3 
-      \item[...] .....
+      %\item[...] .....
       \item[n.] au contenu de la case mémoire, j'ajoute $n$ 
       \item[n+1.] je retourne le contenu de la case mémoire
    \end{description}
@@ -338,29 +353,14 @@ def est_un_carre(x):
 \end{itemize}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Exo 1 : chaînes de caractères}
+\frametitle{Code César et messages secret}
 \begin{itemize} 
-  \item écrire une fonction qui prend une chaine $s$ et qui retourne la chaine a l'envers
-  \item écrire une fonction qui norme les chaines : pas de majuscule, d'espace de ponctuation ou d'apostrophe 
-  \item écrire une fonction qui verifie qu'une chaine est un palindrome, après normage.
-  \begin{itemize}
-    \item Laval, ici, Laval
-    \item tu l'as trop ecrase César ce port salut
-    \item Esope reste ici et se repose.
-  \end{itemize}
-\end{itemize}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{Exo 2 : énigme mathematique}
-\begin{itemize} 
- \item je cherche un nombre entier $p$, tel que $p-1$ soit un carré, et $p+1$ un cube
- \item indice : il est entre 1 et 100.
- \item écrire une fonction est\_un\_cube en utilisant la fontion racine cubique donnee.
- \item faire une boucle enumerative entre 1 et 100 et tester par force brute chaque nombre
+  \item con
 \end{itemize}
 \end{frame}
 \begin{frame}
-\frametitle{Exo 3 : animation graphique}
+
+\frametitle{animation graphique}
 \begin{itemize} 
    \item on souhaite faire rebondir une sphére avec la bibliothèque VTK
 \end{itemize}
