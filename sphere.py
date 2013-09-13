@@ -108,39 +108,38 @@ iren.SetInteractorStyle(style)
 iren.Initialize()
 iren.Start()
 
-N=100
-dx = L*1./(3.*N)
-dy = -H*1./N
-dz = -1./N
+vx = 8.
+vy = 3
+vz = -5
 y = H
 x = 0.
 z = P/2. 
 t = 0
 dt = 1/100.
-frein = 0.8
+frein = 1. 
 while True:
     time.sleep(0.01)
     t += dt
-    x += t * dx
-    y += t * dy
-    z += t * dz
+    x += dt * vx
+    y += dt * vy
+    z += dt * vz
     if y < 0: 
-        dy *= -frein 
+        vy *= -frein 
         y = 0
     if y > H:
-        dy *= -frein
+        vy *= -frein
         y = H
     if x < 0:
-        dx *= -frein
+        vx *= -frein
         x = 0
     if x > L: 
-        dx *= -frein
+        vx *= -frein
         x = L
     if z < 0:
-        dz *= -frein
+        vz *= -frein
         z = 0
     if z > P: 
-        dz *= -frein
+        vz *= -frein
         z = P
     sphereActor.SetPosition(x,y,z)
     renWin.Render()

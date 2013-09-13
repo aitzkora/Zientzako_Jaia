@@ -32,31 +32,18 @@
 \usepackage[french]{babel}
 \usepackage{algpseudocode}
 \usepackage{relsize}
-\newcommand{\fleche}{\alert{$\pmb{\longrightarrow}$}~~}
-\newcommand{\calM}{{\mathcal{M}}}
-\newcommand{\calU}{{\mathcal{U}}}
-\newcommand{\Cau}{\mathcal{C}_{n+1}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Sym}[1]{\mathcal{S}_{#1}(\R)}
-\newcommand{\tran}{^{\top}}
-\newcommand{\pssg}{\langle \langle}
-\newcommand{\pssd}{\rangle \rangle}
-\newcommand{\aronde}{\mathcal{A}}
-\newcommand{\Tr}{\mathtt{Tr}}
-\newcommand{\Matr}[1]{\mathcal{M}_{#1}(\R)}
-\newcommand{\calV}{{\mathcal{V}}}
-\newcommand{\calS}{{\mathcal{S}}}
-\newcommand{\corra}{{\mathrm{corr}_a}}
-\newcommand{\rmD}{{\mathrm{D}}}
-\newcommand{\rmN}{{\mathrm{N}}}
-\newcommand{\rmP}{{\mathrm{P}}}
-\newcommand{\rmT}{{\mathrm{T}}}
-\def\Sy{{\cal S}_n}
-\newcommand{\accol}[1]{{\left\{ \begin{array}{ll} #1 \end{array} \right.}}
-\newcommand{\prods}[2]{\langle #1,#2 \rangle}
-\newcommand{\Aa}{\mathcal{A}}
-\newcommand{\norm}[1]{\|#1\|}
-\newcommand{\python}{\textcolor{dkgreen}{\bf Python}{} }
+\usepackage{emerald}
+\newcommand{\python}{\textcolor{dkgreen}{\textbf{Python}}{} }
+%%%%% for smiley
+\def\mysmile#1{{\ooalign{\hfil\lower.06ex % a smiley face
+ \hbox{$\scriptscriptstyle#1$}\hfil\crcr
+ \hfil\lower.7ex\hbox{\"{}}\hfil\crcr
+ \mathhexbox20D}}}
+
+
+\newcommand{\bad}{\bf \textcolor{red}{\mysmile \frown}}
+\newcommand{\neutral}{\bf \textcolor{blue}{\mysmile \minus}}
+\newcommand{\good}{\bf \textcolor{green}{\mysmile \smile}}
 
 %% ====== my bearmer ==
 \mode<presentation> {
@@ -93,15 +80,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Francisation du pseudo code
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\algrenewcommand\algorithmicif{\textbf{si}}
-\algrenewcommand\algorithmicend{\textbf{fin}}
-\algrenewcommand\algorithmicelse{\textbf{sinon}}
-\algrenewcommand\algorithmicwhile{\textbf{tant que}}
-\algrenewcommand\algorithmicthen{\textbf{alors}}
-\algrenewcommand\algorithmicfor{\textbf{pour}}
-\algrenewcommand\algorithmicreturn{\textbf{retourner}}
-\algrenewcommand\algorithmicdo{\textbf{faire}}
-\algrenewcommand\algorithmicfunction{\textbf{fonction}}
+\algrenewcommand\algorithmicif{{\ECFTeenSpirit si}}
+\algrenewcommand\algorithmicend{{\ECFTeenSpirit fin}}
+\algrenewcommand\algorithmicelse{{\ECFTeenSpirit sinon}}
+\algrenewcommand\algorithmicwhile{{\ECFTeenSpirit tant que}}
+\algrenewcommand\algorithmicthen{{\ECFTeenSpirit alors}}
+\algrenewcommand\algorithmicfor{{\ECFTeenSpirit pour}}
+\algrenewcommand\algorithmicdo{{\ECFTeenSpirit faire}}
+\algrenewcommand\algorithmicfunction{{\ECFTeenSpirit fonction}}
 
 
 \begin{document}
@@ -111,13 +97,15 @@
 %**************************************************************
 \begin{frame}
 \begin{center}
-{\Large Initiation à la Programmation avec Python } 
+{\Large Initiation à la Programmation avec \python } 
 \end{center}
-%\begin{center}
-%\includegraphics[width=0.3\linewidth]{Fig/gdb}
-%\end{center}
+\vspace{0.5cm}
 \begin{center}
-{\large Inria Bordeaux-Sud Ouest \\ Fête de la Science 2013}
+\includegraphics[width=0.8\linewidth]{python_image.pdf}
+\end{center}
+\vspace{0.5cm}
+\begin{center}
+{\large Inria Bordeaux-Sud Ouest -  Fête de la Science 2013}
 \end{center}
 \end{frame}
 
@@ -127,9 +115,9 @@
 
 \begin{frame}
 \frametitle{Plan}
-\begin{enumerate}
+\begin{enumerate}[<+->]
 \item Qu'est ce que la programmation 
-\item Présentation de Python 
+\item Présentation de \python 
 \item Exemples 
 \end{enumerate}
 \end{frame}
@@ -139,16 +127,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-\frametitle{Définition de la Programmation}
-\begin{itemize}
-  \item En partant d'un \textbf{algorithme} qui réalise une tâche donnée, on écrit un logiciel ou un programme à l'aide d' un langage
-  informatique, qui lorsque qu'on l'execute sur un ordinater va effectivement réaliser cette tâche.
-  \item le programme prend souvent des données en entrée, réalise un traitement dessus, et fournit des données en sortie. C'est la
-  valeur ajouté d'un programme
-\end{itemize}
+\frametitle{Une définition de la Programmation}
+\begin{itemize}[<+->]
+  \item En partant d'un \textbf{algorithme} qui réalise une tâche donnée, on écrit un \textbf{logiciel} ou un \textbf{programme} à l'aide d'un langage informatique, qui lorsque qu'on l'exécute sur un ordinateur, réalise effectivement cette tâche.
+  \item le programme prend souvent des données en entrée, effectue un traitement, et retourne des données en sortie. Le 
+  traitement en question des données est la \textbf{valeur ajoutée} du programme.
+ \item on peut schématiser cela grossièrement par : 
 \begin{center}
-\includegraphics[width=0.3\linewidth]{dik2.pdf}
+\includegraphics[width=0.4\linewidth]{dik2.pdf}
 \end{center}
+\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -158,12 +146,12 @@
 \begin{frame}[fragile]
 \frametitle{Exemple : somme des $n$ premiers entiers}
 \begin{itemize}[<+->]
-  \item l'algorithme peut ressembler a ca : 
+  \item l'algorithme peut ressembler à ça : 
    \begin{description}
-      \item[1.] dans une case mémoire (variable) je mets 1
+      \item[1.] dans une case mémoire (variable), je mets 1
       \item[2.] au contenu de la case mémoire, j'ajoute 2
       \item[3.] au contenu de la case, j'ajoute 3 
-      %\item[...] .....
+      \item[...] .....
       \item[n.] au contenu de la case mémoire, j'ajoute $n$ 
       \item[n+1.] je retourne le contenu de la case mémoire
    \end{description}
@@ -194,12 +182,16 @@
 % Remarques générales sur Python 
 %****************************************************************
 \begin{frame}[fragile]
-\frametitle{Caracteristiques du langage \python}
+\frametitle{Caractèristiques du langage \python}
 \begin{itemize}
-  \item \python est un langage interprété : on peut modifier
-  dynamiquement (à la volée) le code du programme.
+  \item \python est un langage interprété : 
+   \begin{description}
+      \item[$\good$] pas de compilation.  
+      \item[$\bad$] plus lent qu'un programme compilé
+      \item[$\good$] modification dynamique possible
+   \end{description} 
   \item la structure du programme se gère grâce à des indentations : attention à aligner
-  les blocs avec le même nombre d'espace
+  les blocs avec le même nombre d'espaces
 \vspace{1cm}
 \begin{columns}
 \column{0.4\linewidth}
@@ -221,22 +213,38 @@ while i < 10 :
 \end{columns}
 \end{itemize}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% structures de données
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
-\frametitle{Le premier programme}
-\begin{itemize}
- \item Quand on commence a apprendre un langage informatique, la ``tradition'' veut que le premier
- programme qu'on écrit soit un programme affichant ``bonjour, monde''\footnote{Hello, World dans la langue de Shakespeare}
-\item dans la console de {\bf spyder}, on ecrira
-\begin{lstlisting}
-print 'bonjour, Monde'
-\end{lstlisting}
-\item ca doit ressembler à quelque chose comme
-\begin{center}
-\includegraphics[width=0.7\linewidth]{capture_hello.png}
-\end{center}
+\frametitle{Structures de données}
+\begin{itemize}[<+->]
+   \item pour manipuler des données, on a besoin de \textbf{structures de données}
+   \item nombres : 
+       \begin{itemize}
+         \item entiers : \texttt{n = 2} 
+         \item flottants : \texttt{z = 1.45e-12, b=sqrt(2.)}
+       \end{itemize}
+   \item textes : chaines de charactères 
+       \begin{itemize}
+        \item quote simples : \texttt{ a = '123'} 
+        \item double quotes : \texttt{ s = "coucou"}
+       \end{itemize}
+   \item listes : 
+       \begin{itemize}
+          \item \texttt{l  =  [1, '2', -5] ; print l[2]} 
+          \item \texttt{v = range(1,10) \# v = [1, ..., 9]}
+       \end{itemize}
+   \item dictionnaires : 
+     \begin{itemize}
+      \item \texttt{ dic= \{ 'a':'coucou', 12:[1,2,3] \} }
+      \item dic['a'] contient 'coucou' et \texttt{ dic[12][0]} contient 1
+      \end{itemize}
 \end{itemize}
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% branchement
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : branchement}
 \begin{itemize}
@@ -265,7 +273,9 @@ else:
 \end{columns}
 \end{itemize}
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% boucle tant que
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : boucle \textbf{tant que}}
 \begin{columns}
@@ -284,7 +294,9 @@ while i < 10 :
 \end{lstlisting}
 \end{columns}
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% boucle enumerative
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : boucle enumérative}
 \begin{itemize}
@@ -322,7 +334,9 @@ for m in l:
 \end{columns}
 \end{itemize}
 \end{frame}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% fonctions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : les fonctions}
 \begin{itemize}
@@ -335,9 +349,9 @@ for m in l:
 \Function{est\_un\_carre}{$x$}
    %\If {$\sqrt{x} \dot \sqrt{x} = x$}
    \If { $\sqrt{x} \times \sqrt{x}= x$}
-       \State{\textbf{retourner} vrai}
+       \State{{\ECFTeenSpirit retourner} vrai}
     \Else 
-       \State{\textbf{retourner} faux}
+       \State{{\ECFTeenSpirit retourner} faux}
    \EndIf
 \EndFunction
 \end{algorithmic}
@@ -350,21 +364,65 @@ def est_un_carre(x):
         return False
 \end{lstlisting} 
 \end{columns}
+\item on peut aussi declarer une fonction anonyme avec \texttt{lambda} : 
+\begin{lstlisting} 
+(lambda x: x*x)(2) # affiche 4
+\end{lstlisting} 
 \end{itemize}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Egun on, Mundua
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
-\frametitle{Code César et messages secret}
+\frametitle{Le premier programme}
+\begin{itemize}
+ \item Quand on commence a apprendre un langage informatique, la ``tradition'' veut que le premier
+ programme qu'on écrit soit un programme affichant ``bonjour, monde''\footnote{Hello, World (anglais), Egun on, Mundua (basque)}
+\item dans la console de {\bf Spyder}, on écrira
+\begin{lstlisting}
+print 'bonjour, Monde'
+\end{lstlisting}
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.7\linewidth]{capture_hello.png}
+\end{center}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Code César et messages secrets}
 \begin{itemize} 
-  \item con
+  \item on veut coder un message en utilisant le code de César : on décalage chaque lettre de l'alphabet d'un nombre donné
+  à l'avance
+  \item exemple : si la clef est 3, a devient d , z devient c \\
+\begin{center} 
+  \begin{tabular}{||c|c|c|c|c|c||}
+ \hline 
+ \hline
+   a & b & c & $\cdots$ & y & z \\
+   \hline
+   d & e & f & $\cdots$ & b & c \\
+  \hline 
+  \hline
+  \end{tabular}
+  \end{center}
+\item a l'aide d'un dictionnaire, on mesure la ``vraisemblance d'une clef'' comme la somme des mots présents dans le dictionnaire
+  \item on choisit la clef dont la vraissemblance est maximum
 \end{itemize}
 \end{frame}
 \begin{frame}
 
-\frametitle{animation graphique}
+\frametitle{Animation graphique}
 \begin{itemize} 
-   \item on souhaite faire rebondir une sphére avec la bibliothèque VTK
+   \item une sphére de centre $(x,y,z)$ rebondit à l'interieur d'un parallélépipède $[0,L]\times [0,H] \times [0,P]$ de la façon suivante
+   $$\begin{cases} 
+   x = x + vx \times dt \\
+   y = y + vy \times dt \\
+   z = z + vz \times dt \\
+   \end{cases}
+   $$
+  \item si on touche un bord, par exemple $x <0 $ alors $vx = -vx$ et on continue
 \end{itemize}
+\begin{center}
+\includegraphics[width=0.5\linewidth]{sphere.png}
+\end{center}
 \end{frame}
-
-
 \end{document}
