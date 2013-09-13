@@ -35,10 +35,6 @@ cube.SetXLength(L)
 cube.SetYLength(H)
 cube.SetZLength(P)
 
-
-
-
-
 #Filtre de coloration
 color_filter = vtk.vtkElevationFilter();
 color_filter.SetInputConnection(sphere.GetOutputPort())
@@ -95,8 +91,6 @@ ren1.AddActor( sphereActor )
 ren1.AddActor( cubeActor )
 ren1.SetBackground( 0.1, 0.2, 0.8 )
 ren1.SetViewport(-L/2,-H/2,1.5*L,1.5*H)
-#ren1.GetActiveCamera().SetPosition(0,0,1)
-#ren1.GetActiveCamera().Dolly(1.)
 #
 # Finally we create the render window which will show up on the screen
 # We put our renderer into the render window using AddRenderer. We also
@@ -106,127 +100,13 @@ renWin = vtk.vtkRenderWindow()
 renWin.AddRenderer( ren1 )
 renWin.SetSize( 1000, 800 )
 
-max_it = 100
+style = vtk.vtkInteractorStyleTrackball()
 
-
-# Define custom interaction.
-# Add the observers to watch for particular events. These invoke
-# Python functions.
-Rotating = 0
-Panning = 0
-Zooming = 0
-
+#renWin.Render()
 iren = vtk.vtkRenderWindowInteractor()
-iren.SetInteractorStyle(None)
 iren.SetRenderWindow(renWin)
-
-# Handle the mouse button events.
-def ButtonEvent(obj, event):
-    global Rotating, Panning, Zooming
-    if event == "LeftButtonPressEvent":
-        Rotating = 1
-    elif event == "LeftButtonReleaseEvent":
-        Rotating = 0
-    elif event == "RightButtonPressEvent":
-        Zooming = 1
-    elif event == "RightButtonReleaseEvent":
-        Zooming = 0
-
-# General high-level logic
-def MouseMove(obj, event):
-    global Rotating, Panning, Zooming
-    global iren, renWin, ren
-    lastXYpos = iren.GetLastEventPosition()
-    lastX = lastXYpos[0]
-    lastY = lastXYpos[1]
-
-    xypos = iren.GetEventPosition()
-    x = xypos[0]
-    y = xypos[1]
-
-    center = renWin.GetSize()
-    centerX = center[0]/2.0
-    centerY = center[1]/2.0
-
-    if Rotating:
-        Rotate(ren1, ren1.GetActiveCamera(), x, y, lastX, lastY,
-               centerX, centerY)
-    elif Panning:
-        Pan(ren1, ren1.GetActiveCamera(), x, y, lastX, lastY, centerX,
-            centerY)
-    elif Zooming:
-        Dolly(ren1, ren1.GetActiveCamera(), x, y, lastX, lastY,
-              centerX, centerY)
-  
-
-def Keypress(obj, event):
-    key = obj.GetKeySym()
-    if key == "e":
-        obj.InvokeEvent("DeleteAllObjects")
-        sys.exit()
-    elif key == "d":
-          iren.GetRenderWindow().Finalize()
-    elif key == "w":
-        Wireframe()
-    elif key =="s":
-        Surface() 
- 
-
-# Routines that translate the events into camera motions.
-
-# This one is associated with the left mouse button. It translates x
-# and y relative motions into camera azimuth and elevation commands.
-def Rotate(renderer, camera, x, y, lastX, lastY, centerX, centerY):    
-    camera.Azimuth(1)
-    camera.Elevation(lastY-y)
-    camera.OrthogonalizeViewUp()
-    renWin.Render()
-
-
-# Dolly converts y-motion into a camera dolly commands.
-def Dolly(renderer, camera, x, y, lastX, lastY, centerX, centerY):
-    dollyFactor = pow(1.02,(0.5*(y-lastY)))
-    if camera.GetParallelProjection():
-        parallelScale = camera.GetParallelScale()*dollyFactor
-        camera.SetParallelScale(parallelScale)
-    else:
-        camera.Dolly(dollyFactor)
-        renderer.ResetCameraClippingRange()
-
-    renWin.Render() 
-
-# Wireframe sets the representation of all actors to wireframe.
-def Wireframe():
-    actors = ren1.GetActors()
-    actors.InitTraversal()
-    actor = actors.GetNextItem()
-    while actor:
-        actor.GetProperty().SetRepresentationToWireframe()
-        actor = actors.GetNextItem()
-
-    renWin.Render() 
-
-# Surface sets the representation of all actors to surface.
-def Surface():
-    actors = ren1.GetActors()
-    actors.InitTraversal()
-    actor = actors.GetNextItem()
-    while actor:
-        actor.GetProperty().SetRepresentationToSurface()
-        actor = actors.GetNextItem()
-    renWin.Render()
-
-
-ren1.AddObserver("LeftButtonPressEvent", ButtonEvent)
-iren.AddObserver("LeftButtonReleaseEvent", ButtonEvent)
-iren.AddObserver("RightButtonPressEvent", ButtonEvent)
-iren.AddObserver("RightButtonReleaseEvent", ButtonEvent)
-iren.AddObserver("MouseMoveEvent", MouseMove)
-iren.AddObserver("KeyPressEvent", Keypress)
-
-
+iren.SetInteractorStyle(style)
 iren.Initialize()
-renWin.Render()
 iren.Start()
 
 N=100
