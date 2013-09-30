@@ -1,5 +1,3 @@
 Zientzako_Jaia
 ==============
-
-source latex et pour l'initiation a Python dans le cadre de
-la fete de la science
+- TPs pour l'initiation à la programmation dans le cadre de la fête de la science

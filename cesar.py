@@ -1,6 +1,5 @@
 from string import ascii_lowercase 
 
-
 def cesar(clef, mot):
   """
   mot_code(clef, mot)
@@ -41,12 +40,13 @@ def vraisemblance(dico, phrase, clef):
 from numpy import loadtxt
 dico = loadtxt('dictionnaire',dtype=str).tolist()
 
-message_code = 'ohv pdwkv f hvw elhq'
+message_code = 'hi owasg acwbg zo dvmgweis eis zsg aohvg'
 phrase = message_code.split()
 
 for clef in range(26):
-    if vraisemblance(dico, phrase, clef) > 0:
+    vrai = vraisemblance(dico, phrase, clef) 
+    if vrai > 0:
         s = ''
         for mot in phrase:
             s += cesar(-clef,mot)+ ' '
-        print 'pour la clef %d , le message peut etre : %s' % (clef, s)    
+        print 'clef: %2d, vraissemblance %2d: %s' % (clef, vrai,s)    
