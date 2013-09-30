@@ -80,14 +80,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Francisation du pseudo code
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\algrenewcommand\algorithmicif{{\ECFTeenSpirit si}}
-\algrenewcommand\algorithmicend{{\ECFTeenSpirit fin}}
-\algrenewcommand\algorithmicelse{{\ECFTeenSpirit sinon}}
-\algrenewcommand\algorithmicwhile{{\ECFTeenSpirit tant que}}
-\algrenewcommand\algorithmicthen{{\ECFTeenSpirit alors}}
-\algrenewcommand\algorithmicfor{{\ECFTeenSpirit pour}}
-\algrenewcommand\algorithmicdo{{\ECFTeenSpirit faire}}
-\algrenewcommand\algorithmicfunction{{\ECFTeenSpirit fonction}}
+\algrenewcommand\algorithmicif{{\ECFAugie si}}
+\algrenewcommand\algorithmicend{{\ECFAugie fin}}
+\algrenewcommand\algorithmicelse{{\ECFAugie sinon}}
+\algrenewcommand\algorithmicwhile{{\ECFAugie tant que}}
+\algrenewcommand\algorithmicthen{{\ECFAugie alors}}
+\algrenewcommand\algorithmicfor{{\ECFAugie pour}}
+\algrenewcommand\algorithmicdo{{\ECFAugie faire}}
+\algrenewcommand\algorithmicfunction{{\ECFAugie fonction}}
 
 
 \begin{document}
@@ -116,8 +116,8 @@
 \begin{frame}
 \frametitle{Plan}
 \begin{enumerate}[<+->]
-\item Qu'est ce que la programmation 
-\item Présentation de \python 
+\item Qu'est ce que la programmation ? 
+\item Présentation de \python.
 \item Exemples 
 \end{enumerate}
 \end{frame}
@@ -184,12 +184,8 @@
 \begin{frame}[fragile]
 \frametitle{Caractèristiques du langage \python}
 \begin{itemize}
-  \item \python est un langage interprété : 
-   \begin{description}
-      \item[$\good$] pas de compilation.  
-      \item[$\bad$] plus lent qu'un programme compilé
-      \item[$\good$] modification dynamique possible
-   \end{description} 
+  \item \python est un langage de programmation a typage dynamique qui support plusieurs paradigmes de programmation.
+  \item il est genéralement executé par des interpréteurs (CPython, Pypy , JPython)
   \item la structure du programme se gère grâce à des indentations : attention à aligner
   les blocs avec le même nombre d'espaces
 \vspace{1cm}
@@ -223,12 +219,11 @@ while i < 10 :
    \item nombres : 
        \begin{itemize}
          \item entiers : \texttt{n = 2} 
-         \item flottants : \texttt{z = 1.45e-12, b=sqrt(2.)}
+         \item flottants : \texttt{z = 1.3225, b=1/3.}
        \end{itemize}
    \item textes : chaines de charactères 
        \begin{itemize}
-        \item quote simples : \texttt{ a = '123'} 
-        \item double quotes : \texttt{ s = "coucou"}
+        \item par exemple, \texttt{ a = '123'} ou \texttt{ s = "coucou"}
        \end{itemize}
    \item listes : 
        \begin{itemize}
@@ -342,29 +337,28 @@ for m in l:
 \begin{itemize}
 \item Permet de découper un programme en sous tâches. 
 \item prend des arguments (liste d'arguments en parenthèses)
-\item renvoie un résultat (mot-clef return)
+\item renvoie un résultat (mot-clef \texttt{return})
 \begin{columns}
 \column{0.5\linewidth}
 \begin{algorithmic}
-\Function{est\_un\_carre}{$x$}
-   %\If {$\sqrt{x} \dot \sqrt{x} = x$}
-   \If { $\sqrt{x} \times \sqrt{x}= x$}
-       \State{{\ECFTeenSpirit retourner} vrai}
+\Function{est\_pair}{$x$}
+   \If {$x \bmod 2  = 0$}
+       \State{{\ECFAugie retourner} vrai}
     \Else 
-       \State{{\ECFTeenSpirit retourner} faux}
+       \State{{\ECFAugie retourner} faux}
    \EndIf
 \EndFunction
 \end{algorithmic}
 \column{0.5\linewidth}
 \begin{lstlisting} 
-def est_un_carre(x):
-    if sqrt(x)*sqrt(x) == x : 
+def est_pair(x):
+    if x % 2 == 0 : 
         return True
     else :
         return False
 \end{lstlisting} 
 \end{columns}
-\item on peut aussi declarer une fonction anonyme avec \texttt{lambda} : 
+\item on peut aussi declarer une fonction {\em anonyme} avec \texttt{lambda} : 
 \begin{lstlisting} 
 (lambda x: x*x)(2) # affiche 4
 \end{lstlisting} 
@@ -376,7 +370,7 @@ def est_un_carre(x):
 \begin{frame}[fragile]
 \frametitle{Le premier programme}
 \begin{itemize}
- \item Quand on commence a apprendre un langage informatique, la ``tradition'' veut que le premier
+ \item Quand on commence à apprendre un langage informatique, la ``tradition'' veut que le premier
  programme qu'on écrit soit un programme affichant ``bonjour, monde''\footnote{Hello, World (anglais), Egun on, Mundua (basque)}
 \item dans la console de {\bf Spyder}, on écrira
 \begin{lstlisting}
@@ -390,7 +384,7 @@ print 'bonjour, Monde'
 \begin{frame}[fragile]
 \frametitle{Code César et messages secrets}
 \begin{itemize} 
-  \item on veut coder un message en utilisant le code de César : on décalage chaque lettre de l'alphabet d'un nombre donné
+  \item on veut coder un message en utilisant le code de César : on décale chaque lettre de l'alphabet d'un nombre donné
   à l'avance
   \item exemple : si la clef est 3, a devient d , z devient c \\
 \begin{center} 
@@ -404,15 +398,15 @@ print 'bonjour, Monde'
   \hline
   \end{tabular}
   \end{center}
-\item a l'aide d'un dictionnaire, on mesure la ``vraisemblance d'une clef'' comme la somme des mots présents dans le dictionnaire
-  \item on choisit la clef dont la vraissemblance est maximum
+\item à l'aide d'un dictionnaire, on mesure la ``vraisemblance d'une clef'' pour un message comme la somme des mots du message qui décodés sont dans le dictionnaire
+  \item on choisit alors la clef dont la vraissemblance est maximum
 \end{itemize}
 \end{frame}
 \begin{frame}
 
 \frametitle{Animation graphique}
 \begin{itemize} 
-   \item une sphére de centre $(x,y,z)$ rebondit à l'interieur d'un parallélépipède $[0,L]\times [0,H] \times [0,P]$ de la façon suivante
+   \item une sphère de centre $(x,y,z)$ rebondit à l'interieur d'un parallélépipède $[0,L]\times [0,H] \times [0,P]$ de la façon suivante
    $$\begin{cases} 
    x = x + vx \times dt \\
    y = y + vy \times dt \\

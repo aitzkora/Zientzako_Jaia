@@ -44,7 +44,7 @@ dico = loadtxt('dictionnaire',dtype=str).tolist()
 message_code = 'ohv pdwkv f hvw elhq'
 phrase = message_code.split()
 
-for clef in range(16):
+for clef in range(26):
     if vraisemblance(dico, phrase, clef) > 0:
         s = ''
         for mot in phrase:

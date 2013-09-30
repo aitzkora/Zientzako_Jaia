@@ -35,7 +35,7 @@ sphereMapper.SetInputConnection( color_filter.GetOutputPort() )
 # c'est cet acteur qu'on va modifier au cours de l'animation
 sphereActor = vtk.vtkActor()
 sphereActor.SetMapper( sphereMapper )
-sphereActor.SetPosition(0., H, P/2)
+sphereActor.SetPosition(L/2., H, P/2)
 
 #########
 # CUBE 
