@@ -1,4 +1,4 @@
-\documentclass[11pt]{letter}
+\documentclass[12pt]{letter}
 
 %%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[french]{babel}
@@ -8,7 +8,7 @@
 \usepackage{stmaryrd}
 \usepackage{amscd}
 \usepackage{enumerate}
-\usepackage{graphicx} %\usepackage{epsfig}
+\usepackage{graphicx} 
 \usepackage{amsfonts}
 \usepackage[utf8]{inputenc}  
 \usepackage{tikz}
@@ -37,7 +37,6 @@
 }
 
 \begin{document}
-%\pagestyle{empty}
 
 %%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
@@ -48,7 +47,7 @@
 \textbf{Codes César}
 \begin{enumerate}
    \item écrire une fonction \texttt{cesar} qui prend une clef (un nombre entre 0 et 26) et un mot (une chaîne de caractères, par exemple mot='ici')
-   et qui renvoie la chaine codée. 
+   et qui renvoie la chaîne codée. 
    \begin{lstlisting}
     def cesar(clef, mot):
          .....
@@ -58,32 +57,32 @@
     \begin{itemize}
       \item créer une liste (\texttt{alpha}) qui contient l'alphabet. Pour cela, regarder ce que renvoie la commande \\ 
       \texttt{string.ascii\_lowercase}
-      attention ne pas oublier d'importer le module string (\texttt{import string})
-      \item créer la liste décalée (\texttt{decale}) de la clef (utilise une boucle, ou l'indiçage des listes plus la contatenation 
+      Attention à ne pas oublier d'importer le module string (\texttt{import string})
+      \item créer la liste décalée (\texttt{decale}) de la clef (utiliser une boucle, ou l'indiçage des listes plus la contatenation 
       \begin{lstlisting}
         l = [1,2,3, 4]; g = l[2:] # g = [3,4]
         a = [12, 'g', -1] + ['e', '7'] #  a = [12, 'g', -1, 'e', '7']
        \end{lstlisting}
-      \item créer un dictionnaire (par une boucle dic = \{\} avec pour clefs les éléments de \texttt{alpha} et pour valeurs les
+      \item créer un dictionnaire (par exemple dic = \{\} et faire une boucle avec dic.update({clef:valeur}) avec pour clefs les éléments de \texttt{alpha} et pour valeurs les
       elements de \texttt{decale}
-      \item avec une boucle sur la longueur de mot, crypter le mot
+      \item avec une boucle sur la longueur de mot, crypter le mot. on vérifira que
+      \texttt{cesar(10, "ici") } renvoies bien "sms" et que \texttt{cesar(-10, "sms") } renvoies "ici".
     \end{itemize}
-   \item écrire une fonction \texttt{vraisemblance} prenant en argument un dictionnaire(une liste de chaînes de caractères), une phrase (liste
-   de mots) et une clef, et qui compte le nombre de mots de la phrase decodés par la clef presents dans le dictionnaire
+   \item écrire une fonction \texttt{vraisemblance} prenant en argument un dictionnaire (une liste de chaînes de caractères), 
+   une phrase (liste de mots) et une clef, et qui compte le nombre de mots décodés présents dans le dictionnaire
    \item en utilisant le squelette de programme fourni et le mini-dictionnaire, tenter de décoder la phrase suivante \\
    \begin{center}
    {\large \bf hi owasg acwbg zo dvmgweis eis zsg aohvg}
    \end{center} 
-  
-
+   \vspace{0.5cm}
    en cherchant une clef dont la vraisemblance est supérieure ou égale à 1.
 \end{enumerate}
 
 \textbf{Animation graphique}
 
  Le but de cet exercice est de vous montrer comment la programmation peut intervenir dans une animation graphique simple ``d'images de synthèse''.
- On considera dans ce cadre, juste le coté géometrique de l'animation. Dans le squelette fourni en TP, on a déjà un début d'animation: 
- une sphere qui suit une trajectoire rectiligne. 
+ On considérera dans ce cadre, juste le coté géométrique de l'animation. Dans le squelette fourni en TP, on a déjà un début d'animation: 
+ une sphère qui suit une trajectoire rectiligne. 
  Pour situer la sphère aux coordonnées $(x,y,z)$ dans le repère choisi, on utilisera l'instruction \texttt{sphereActor.SetPosition(x,y,z)}
  Dans l'exemple donné, on fait varier la coordonnée $y$ de la sphère. 
 
@@ -91,16 +90,16 @@
  
     \item Faire tourner le programme. Pour régler la position de la caméra, utiliser
     la souris et presser \texttt{e} pour lancer l'animation. Enlever le commentaire devant la ligne
-    \texttt{ren1.GetActiveCamera().Azimuth( 0.2 )} pour tourner autour de la scene durant l'animation
-    \item essayer de programmer un rebond quand on detecte des coordonnées $y$ négatives, en utilisant le schéma suivant 
+    \texttt{ren1.GetActiveCamera().Azimuth( 0.2 )} pour tourner autour de la scène durant l'animation
+    \item essayer de programmer un rebond quand on détecte des coordonnées $y$ négatives, en utilisant le schéma suivant 
    \begin{center}
      \includegraphics[width=0.8\linewidth]{rebond.pdf}
    \end{center}
    On pourra utiliser un \texttt{if} dans la boucle en temps. Bien penser à remettre $y$ à zéro pour rebondir
    \item programmer un rebond quand $y \geqslant H$
-   \item on introduit de la même façon les composantes $v_x$ et $v_z$ de la vitese. Programmer les tests de bords ($x <0$, $z < 0$ et $x > L$, $z > P$)
+   \item on introduit de la même façon les composantes $v_x$ et $v_z$ de la vitesse. Programmer les tests de bords ($x <0$, $z < 0$ et $x > L$, $z > P$)
    \item on peut ajouter du frein $vx *= -\alpha$ où $\alpha < 1$ pour ralentir la balle quand elle rebondit.
-   \item voila, on a notre animation graphique. En allant regarder la documentation de vtk (\texttt{ www.vtk.org}), editer le fichier \texttt{cree\_scene.py}
+   \item voila, on a notre animation graphique. En allant regarder la documentation de VTK(\texttt{ www.vtk.org}), éditer le fichier \texttt{cree\_scene.py}
    pour modifier les paramètres de l'animation (forme de la boule, couleurs de fond, etc...)
     
   \end{enumerate}

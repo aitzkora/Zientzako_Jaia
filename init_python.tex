@@ -100,9 +100,10 @@
 {\Large Initiation à la Programmation avec \python } 
 \end{center}
 \vspace{0.5cm}
+\IfFileExists{python_image.pdf}{
 \begin{center}
 \includegraphics[width=0.8\linewidth]{python_image.pdf}
-\end{center}
+\end{center}}
 \vspace{0.5cm}
 \begin{center}
 {\large Inria Bordeaux-Sud Ouest -  Fête de la Science 2013}
@@ -118,7 +119,7 @@
 \begin{enumerate}[<+->]
 \item Qu'est ce que la programmation ? 
 \item Présentation de \python.
-\item Exemples 
+\item Exercices 
 \end{enumerate}
 \end{frame}
 
@@ -182,12 +183,12 @@
 % Remarques générales sur Python 
 %****************************************************************
 \begin{frame}[fragile]
-\frametitle{Caractèristiques du langage \python}
+\frametitle{Caractéristiques du langage \python}
 \begin{itemize}
-  \item \python est un langage de programmation a typage dynamique qui support plusieurs paradigmes de programmation.
-  \item il est genéralement executé par des interpréteurs (CPython, Pypy , JPython)
+  \item \python est un langage de programmation à typage dynamique qui support plusieurs paradigmes de programmation.
+  \item il est généralement exécuté par des interpréteurs (CPython, Pypy , JPython)
   \item la structure du programme se gère grâce à des indentations : attention à aligner
-  les blocs avec le même nombre d'espaces
+  les blocs avec le même nombre d'espaces.
 \vspace{1cm}
 \begin{columns}
 \column{0.4\linewidth}
@@ -221,7 +222,7 @@ while i < 10 :
          \item entiers : \texttt{n = 2} 
          \item flottants : \texttt{z = 1.3225, b=1/3.}
        \end{itemize}
-   \item textes : chaines de charactères 
+   \item textes : chaînes de caractères 
        \begin{itemize}
         \item par exemple, \texttt{ a = '123'} ou \texttt{ s = "coucou"}
        \end{itemize}
@@ -232,8 +233,8 @@ while i < 10 :
        \end{itemize}
    \item dictionnaires : 
      \begin{itemize}
-      \item \texttt{ dic= \{ 'a':'coucou', 12:[1,2,3] \} }
-      \item dic['a'] contient 'coucou' et \texttt{ dic[12][0]} contient 1
+      \item \texttt{dic= \{ 'a':'coucou', 12:[1,2,3] \} }
+      \item dic['a'] contient 'coucou' et \texttt{dic[12][0]} contient 1
       \end{itemize}
 \end{itemize}
 \end{frame}
@@ -274,14 +275,14 @@ else:
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : boucle \textbf{tant que}}
 \begin{columns}
-\column{0.4\linewidth}
+\column{0.5\linewidth}
 \begin{algorithmic}
 \State{$i \gets 1$} 
-\While{ $i < 10$} 
+\While{$i < 10$} 
     \State{ $i \gets 2 \times i$ } 
 \EndWhile
 \end{algorithmic}
-\column{0.4\linewidth}
+\column{0.5\linewidth}
 \begin{lstlisting}
 i = 1  
 while i < 10 : 
@@ -293,7 +294,7 @@ while i < 10 :
 % boucle enumerative
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
-\frametitle{Structure de contrôle : boucle enumérative}
+\frametitle{Structure de contrôle : boucle énumérative}
 \begin{itemize}
 \item
 \begin{columns}
@@ -358,7 +359,7 @@ def est_pair(x):
         return False
 \end{lstlisting} 
 \end{columns}
-\item on peut aussi declarer une fonction {\em anonyme} avec \texttt{lambda} : 
+\item on peut aussi déclarer une fonction {\em anonyme} avec \texttt{lambda} : 
 \begin{lstlisting} 
 (lambda x: x*x)(2) # affiche 4
 \end{lstlisting} 
@@ -371,7 +372,7 @@ def est_pair(x):
 \frametitle{Le premier programme}
 \begin{itemize}
  \item Quand on commence à apprendre un langage informatique, la ``tradition'' veut que le premier
- programme qu'on écrit soit un programme affichant ``bonjour, monde''\footnote{Hello, World (anglais), Egun on, Mundua (basque)}
+ programme qu'on écrit soit un programme affichant ``bonjour, monde''
 \item dans la console de {\bf Spyder}, on écrira
 \begin{lstlisting}
 print 'bonjour, Monde'
@@ -399,21 +400,21 @@ print 'bonjour, Monde'
   \end{tabular}
   \end{center}
 \item à l'aide d'un dictionnaire, on mesure la ``vraisemblance d'une clef'' pour un message comme la somme des mots du message qui décodés sont dans le dictionnaire
-  \item on choisit alors la clef dont la vraissemblance est maximum
+  \item on choisit alors la clef dont la vraisemblance est maximum
 \end{itemize}
 \end{frame}
 \begin{frame}
 
 \frametitle{Animation graphique}
 \begin{itemize} 
-   \item une sphère de centre $(x,y,z)$ rebondit à l'interieur d'un parallélépipède $[0,L]\times [0,H] \times [0,P]$ de la façon suivante
+   \item une sphère de centre $(x,y,z)$ rebondit à l'intérieur d'un parallélépipède $[0,L]\times [0,H] \times [0,P]$ de la façon suivante
    $$\begin{cases} 
-   x = x + vx \times dt \\
-   y = y + vy \times dt \\
-   z = z + vz \times dt \\
+   x \leftarrow x + v_x \times dt \\
+   y \leftarrow y + v_y \times dt \\
+   z \leftarrow z + v_z \times dt \\
    \end{cases}
    $$
-  \item si on touche un bord, par exemple $x <0 $ alors $vx = -vx$ et on continue
+  \item si on touche un bord, par exemple $y <0 $ alors $v_y \leftarrow -v_y, y \leftarrow 0 $ et on continue
 \end{itemize}
 \begin{center}
 \includegraphics[width=0.5\linewidth]{sphere.png}
