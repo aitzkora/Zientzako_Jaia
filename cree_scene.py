@@ -89,11 +89,15 @@ renWin.SetSize( 1000, 800 )
 # w - mode fil de fer
 # s - mode surface
 
+def dummy(obj,ev):
+    print("coucou")
+ren1.RemoveObservers('LeftButtonPressEvent')
+ren1.AddObserver('LeftButtonPressEvent',dummy,1)  
 
-style = vtk.vtkInteractorStyleTrackball()
-iren = vtk.vtkRenderWindowInteractor()
-iren.SetRenderWindow(renWin)
-iren.SetInteractorStyle(style)
-iren.Initialize()
-iren.Start()
+#style = KeyPressInteractorStyle()
+#iren = vtk.vtkRenderWindowInteractor()
+#iren.SetRenderWindow(renWin)
+#iren.SetInteractorStyle(style)
+#iren.Initialize()
+#iren.Start()
 
