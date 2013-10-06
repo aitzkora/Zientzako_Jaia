@@ -77,34 +77,3 @@ ren1.SetViewport(-L/2,-H/2,1.5*L,1.5*H)
 renWin = vtk.vtkRenderWindow()
 renWin.AddRenderer( ren1 )
 renWin.SetSize( 1000, 800 )
-
-#######################""
-# STYLE D'INTERACTION
-#########################
-# Avant de lancer l'animation propement dite
-# on utilise un style d'interaction a la souris
-# pour regler les parametres de la scene
-# raccourcis clavier
-# e - quitter l'interaction
-# w - mode fil de fer
-# s - mode surface
-
-import sys
-def PresseBouton(obj,ev):
-        touche = obj.GetKeySym()
-        if touche == "q":
-            sys.exit()
-        else:
-            print(touche)
-
-vx = 8.
-vy = 3
-vz = -5
-y = H
-x = L/2.
-z = P/2. 
-t = 0
-dt = 1/100.
-frein = 1. 
-
-
