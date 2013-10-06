@@ -1,5 +1,4 @@
 from cree_scene import *
-import time
 vx = 8.
 vy = 3
 vz = -5
@@ -9,8 +8,9 @@ z = P/2.
 t = 0
 dt = 1/100.
 frein = 1. 
-while True:
-    time.sleep(0.01)
+
+def animation(objet, evenement):
+    global t,x,y,z,vx,vy,vz,dt
     t += dt
     x += dt * vx
     y += dt * vy
@@ -35,4 +35,14 @@ while True:
         z = P
     sphereActor.SetPosition(x,y,z)
     renWin.Render()
-    ren1.GetActiveCamera().Azimuth( 0.2 )
+    #ren1.GetActiveCamera().Azimuth( 0.2 )
+
+# initialization
+iren = vtk.vtkRenderWindowInteractor()
+iren.SetRenderWindow(renWin)
+#iren.SetInteractorStyle(style)
+iren.Initialize()
+iren.AddObserver('TimerEvent', animation)
+iren.AddObserver('KeyPressEvent', PresseBouton)
+timerId = iren.CreateRepeatingTimer(1);
+iren.Start()
