@@ -58,13 +58,16 @@
       \item créer une liste (\texttt{alpha}) qui contient l'alphabet. Pour cela, regarder ce que renvoie la commande \\ 
       \texttt{string.ascii\_lowercase}
       Attention à ne pas oublier d'importer le module string (\texttt{import string})
-      \item créer la liste décalée (\texttt{decale}) de la clef (utiliser une boucle, ou l'indiçage des listes plus la contatenation 
+      \item créer la liste décalée (\texttt{decale}) de la clef (utiliser une boucle, ou l'indiçage des listes plus la contaténation 
       \begin{lstlisting}
         l = [1,2,3, 4]; g = l[2:] # g = [3,4]
         a = [12, 'g', -1] + ['e', '7'] #  a = [12, 'g', -1, 'e', '7']
        \end{lstlisting}
-      \item créer un dictionnaire (par exemple dic = \{\} et faire une boucle avec dic.update({clef:valeur}) avec pour clefs les éléments de \texttt{alpha} et pour valeurs les
-      elements de \texttt{decale}
+      \item créer un dictionnaire (par exemple \texttt{dic = \{\}}) et faire une boucle pour insérer une à une les clefs 
+      \begin{lstlisting}
+      dic[clef] = valeur # rajoute la combinaison (clef, valeur) 
+      \end{lstlisting}
+      avec pour clefs les éléments de \texttt{alpha} et pour valeurs les éléments de \texttt{decale}
       \item avec une boucle sur la longueur de mot, crypter le mot. on vérifira que
       \texttt{cesar(10, "ici") } renvoies bien "sms" et que \texttt{cesar(-10, "sms") } renvoies "ici".
     \end{itemize}
@@ -89,7 +92,7 @@
  \begin{enumerate} 
  
     \item Faire tourner le programme. Pour régler la position de la caméra, utiliser
-    la souris et presser \texttt{e} pour lancer l'animation. Enlever le commentaire devant la ligne
+    la souris. Vous pouvez quitter l'animation avec la touche \texttt{q} ou \texttt{e}   Enlever le commentaire devant la ligne
     \texttt{ren1.GetActiveCamera().Azimuth( 0.2 )} pour tourner autour de la scène durant l'animation
     \item essayer de programmer un rebond quand on détecte des coordonnées $y$ négatives, en utilisant le schéma suivant 
    \begin{center}
@@ -98,10 +101,9 @@
    On pourra utiliser un \texttt{if} dans la boucle en temps. Bien penser à remettre $y$ à zéro pour rebondir
    \item programmer un rebond quand $y \geqslant H$
    \item on introduit de la même façon les composantes $v_x$ et $v_z$ de la vitesse. Programmer les tests de bords ($x <0$, $z < 0$ et $x > L$, $z > P$)
-   \item on peut ajouter du frein $vx *= -\alpha$ où $\alpha < 1$ pour ralentir la balle quand elle rebondit.
+   \item on peut ajouter du frein $v_x = -\alpha \times v_x$ où $\alpha < 1$ pour ralentir la balle quand elle rebondit.
    \item voila, on a notre animation graphique. En allant regarder la documentation de VTK(\texttt{ www.vtk.org}), éditer le fichier \texttt{cree\_scene.py}
    pour modifier les paramètres de l'animation (forme de la boule, couleurs de fond, etc...)
-    
   \end{enumerate}
 \end{document}
 
