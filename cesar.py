@@ -1,16 +1,8 @@
-from string import ascii_lowercase 
-
+import string
 
 def cesar(clef, mot):
-   alpha =  list(ascii_lowercase)
-   decale = alpha[clef:] + alpha[:clef]
-   table = {} 
-   for i in range(len(alpha)):
-         table.update({alpha[i]:decale[i]})
-   code = ''
-   for i in range(len(mot)):
-          code += table[mot[i]]
-   return code
+
+    return mot
 
 def vraisemblance(dico, phrase, clef):
     s = 0
@@ -18,14 +10,6 @@ def vraisemblance(dico, phrase, clef):
         if cesar(-clef,mot) in dico:
            s += 1
     return s 
-
-#def cesar_map(clef, mot):
-#  from operator import add as colle
-#  alpha = list(ascii_lowercase)
-#  decale = alpha[clef:] + alpha[:clef]
-#  table = {c:v for (c,v) in zip(alpha,decale) }
-#  return reduce(colle, map(lambda x:table[x], mot))
-
 
 from numpy import loadtxt
 dico = loadtxt('dictionnaire',dtype=str).tolist()
