@@ -24,5 +24,7 @@ else:
         print ('vous avez %d ans ' % diff_ans)
     elif diff_mois == 0 and diff_jour >= 0:
         print ('vous avez %d ans' % diff_ans)
-    elif diff_mois < 0:
+    elif diff_mois == 0 and diff_jour < 0:
+        print ('vous avez %d ans' % diff_ans - 1)
+    else: 
         print ('vous avez %d ans' % diff_ans - 1)
