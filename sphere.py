@@ -1,5 +1,4 @@
 from cree_scene import *
-vx = 8 
 vy = -3
 y = H
 x = L/2.
@@ -10,20 +9,7 @@ dt = 1/100.
 def animation(objet, evenement):
     global t,x,y,z,vx,vy,dt
     t += dt
-    x += dt * vx
     y += dt * vy
-    if y < 0: 
-        vy = -vy 
-        y = 0
-    if y > H:
-        vy = -vy
-        y = H
-    if x < 0:
-        vx = -vx 
-        x = 0
-    if x > L: 
-        vx = -vx 
-        x = L
     sphereActor.SetPosition(x,y,P/2)
     renWin.Render()
 

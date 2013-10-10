@@ -1,7 +1,7 @@
 import vtk
 # Description de la scene
 L = 10.
-P = 5.
+P = 0. 
 H = 4.
 
 ##################
@@ -96,15 +96,3 @@ def PresseBouton(obj,ev):
             sys.exit()
         else:
             print(touche)
-
-vx = 8.
-vy = 3
-vz = -5
-y = H
-x = L/2.
-z = P/2. 
-t = 0
-dt = 1/100.
-frein = 1. 
-
-
