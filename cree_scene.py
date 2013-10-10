@@ -1,7 +1,7 @@
 import vtk
 # Description de la scene
 L = 10.
-P = 5.
+P = 0. 
 H = 4.
 
 ##################
