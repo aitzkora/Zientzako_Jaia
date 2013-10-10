@@ -25,3 +25,4 @@ clean_aux:
 	@echo Cleaning Auxiliary files... 
 	@rm -f *.nav *.out *.toc *.bbl gdb.out  
 	@rm -f *.aux *.toc  *.log  *.snm
+	@rm -fr __pycache__ *.pyc 

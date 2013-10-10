@@ -161,6 +161,7 @@
 \begin{frame}[fragile]
 \frametitle{Exemple : somme des $n$ premiers entiers}
 \begin{itemize}
+  \pause
   \item On peut formaliser l'{\bf algorithme} avec du {\em pseudo-code}
    \begin{algorithmic}
    \State{$s \gets 1$}
@@ -169,10 +170,11 @@
    \EndFor
    \State{afficher $s$}
    \end{algorithmic}
+\pause
 \item Ce qui donne en \python
 \begin{lstlisting} 
     s = 1  
-    for i in range(n):
+    for i in range(1,n+1):
         s = s + i
     print s
 \end{lstlisting}
@@ -184,11 +186,15 @@
 \begin{frame}[fragile]
 \frametitle{Caractéristiques du langage \python}
 \begin{itemize}
-    \item \python est un langage simple, qui accepte plusieurs façons({\em paradigmes}) de programmer 
+  \pause
+  \item \python est un langage simple, qui accepte plusieurs façons({\em paradigmes}) de programmer 
+  \pause
   \item il est généralement exécuté par des interpréteurs (CPython, Pypy , JPython)
+  \pause
   \item la structure du programme se gère grâce à des indentations : attention à aligner
   les blocs avec le même nombre d'espaces.
 \vspace{1cm}
+\pause
 \begin{columns}
 \column{0.4\linewidth}
 {\bf \textcolor{blue}{Bien}} 
@@ -227,14 +233,9 @@ while i < 10 :
        \end{itemize}
    \item listes : 
        \begin{itemize}
-          \item \texttt{l  =  [1, '2', -5] ; print l[2]} 
+          \item \texttt{l  =  [1, 'coucou', -3.14] ; print l[1]} va afficher 'coucou'
           \item \texttt{v = range(1,10) \# v = [1, ..., 9]}
        \end{itemize}
-   \item dictionnaires : 
-     \begin{itemize}
-      \item \texttt{dic= \{ 'a':'coucou', 12:[1,2,3] \} }
-      \item dic['a'] contient 'coucou' et \texttt{dic[12][0]} contient 1
-      \end{itemize}
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -273,21 +274,31 @@ else:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : boucle \textbf{tant que}}
+\begin{itemize}
+\pause
+\item quand on doit faire une action tant qu'une condition est vraie
 \begin{columns}
 \column{0.5\linewidth}
+\pause
 \begin{algorithmic}
 \State{$i \gets 1$} 
 \While{$i < 10$} 
     \State{ $i \gets 2 \times i$ } 
 \EndWhile
+\State{ afficher $i$}
 \end{algorithmic}
 \column{0.5\linewidth}
+\pause
 \begin{lstlisting}
 i = 1  
 while i < 10 : 
-    i = i * 2
+    i *= 2
+print(i)
 \end{lstlisting}
 \end{columns}
+\pause
+\item ce programme doit retourner 16
+\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % boucle enumerative
@@ -295,6 +306,7 @@ while i < 10 :
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : boucle énumérative}
 \begin{itemize}
+\pause
 \item
 \begin{columns}
 \column{0.5\linewidth}
@@ -309,6 +321,7 @@ for i in range(1,11):
     print(i)  
 \end{lstlisting}
 \end{columns}
+\pause
 \item
 \begin{columns}
 \column{0.5\linewidth}
@@ -335,9 +348,13 @@ for m in l:
 \begin{frame}[fragile]
 \frametitle{Structure de contrôle : les fonctions}
 \begin{itemize}
+\pause
 \item Permet de découper un programme en sous tâches. 
+\pause
 \item prend des arguments (liste d'arguments en parenthèses)
+\pause
 \item renvoie un résultat (mot-clef \texttt{return})
+\pause
 \begin{columns}
 \column{0.5\linewidth}
 \begin{algorithmic}
@@ -358,6 +375,7 @@ def est_pair(x):
         return False
 \end{lstlisting} 
 \end{columns}
+\pause
 \item on peut aussi déclarer une fonction {\em anonyme} avec \texttt{lambda} : 
 \begin{lstlisting} 
 (lambda x: x*x)(2) # affiche 4
@@ -382,35 +400,23 @@ print 'bonjour, Monde'
 \end{center}
 \end{frame}
 \begin{frame}[fragile]
-\frametitle{Code César et messages secrets}
-\begin{itemize} 
-  \item on veut coder un message en utilisant le code de César : on décale chaque lettre de l'alphabet d'un nombre donné
-  à l'avance
-  \item exemple : si la clef est 3, a devient d , z devient c \\
-\begin{center} 
-  \begin{tabular}{||c|c|c|c|c|c||}
- \hline 
- \hline
-   a & b & c & $\cdots$ & y & z \\
-   \hline
-   d & e & f & $\cdots$ & b & c \\
-  \hline 
-  \hline
-  \end{tabular}
-  \end{center}
-\item à l'aide d'un dictionnaire, on mesure la ``vraisemblance d'une clef'' pour un message comme la somme des mots du message qui décodés sont dans le dictionnaire
-  \item on choisit alors la clef dont la vraisemblance est maximum
+\frametitle{Date de naissance}
+\begin{itemize}
+    \item on récupère au clavier une date sous la forme \texttt{"xx/yy/zzzz"}. Attention à ne pas oublier les guillemets ""!
+    le squelette de programme stocke le résultat dans les variables \texttt{jour}, \texttt{mois} et \texttt{années}
+    \item on va afficher la date de naissance, avec le mois écrit en toutes lettres grâce à une liste contenant les noms
+    des mois sous forme de chaîne de caractères.
+    \item en utilisant des \texttt{if}, on va calculer l'age de la personne (en années seulement!)
 \end{itemize}
 \end{frame}
 \begin{frame}
 
 \frametitle{Animation graphique}
 \begin{itemize} 
-   \item une sphère de centre $(x,y,z)$ rebondit à l'intérieur d'un parallélépipède $[0,L]\times [0,H] \times [0,P]$ de la façon suivante
+   \item une sphère de centre $(x,y)$ rebondit à l'intérieur d'un parallélépipède $[0,L]\times [0,H]$ de la façon suivante
    $$\begin{cases} 
    x \leftarrow x + v_x \times dt \\
    y \leftarrow y + v_y \times dt \\
-   z \leftarrow z + v_z \times dt \\
    \end{cases}
    $$
   \item si on touche un bord, par exemple $y <0 $ alors $v_y \leftarrow -v_y, y \leftarrow 0 $ et on continue
